@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0F0F0F" />
+
+<title>Rituel Barber | Barbier & Coiffeur Homme à Viry-Châtillon</title>
+<meta name="description" content="Rituel Barber, barber shop premium à Viry-Châtillon. Coupe homme, barbe, dégradé américain et soins. Réservation en ligne." />
+
+<link rel="canonical" href="https://www.rituelbarber.fr/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Rituel Barber | Barbier & Coiffeur Homme à Viry-Châtillon" />
+<meta property="og:description" content="Barber shop premium à Viry-Châtillon. Coupe homme, barbe, dégradé américain et soins. Réservation en ligne." />
+<meta property="og:url" content="https://www.rituelbarber.fr/" />
+<meta property="og:image" content="https://www.rituelbarber.fr/images/hero.jpg" />
+<meta property="og:locale" content="fr_FR" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Données structurées : SEO local -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HairSalon",
+  "name": "Rituel Barber",
+  "image": "https://www.rituelbarber.fr/images/hero.jpg",
+  "@id": "https://www.rituelbarber.fr/",
+  "url": "https://www.rituelbarber.fr/",
+  "telephone": "+33614340113",
+  "email": "rituelcoiffure91@gmail.com",
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "39-43 Avenue du Général de Gaulle",
+    "addressLocality": "Viry-Châtillon",
+    "postalCode": "91170",
+    "addressCountry": "FR"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 48.6722, "longitude": 2.3753 },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "10:00", "closes": "20:00"
+  }],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "120" },
+  "sameAs": ["https://www.instagram.com/rituel_barber"]
+}
+</script>
+
+<style>
+:root{
+  --black:#0F0F0F;
+  --dark-green:#394632;
+  --olive:#556B4D;
+  --wood:#B88655;
+  --cream:#F5F2EC;
+  --topbar-h:40px;
+  --header-h:74px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--black);
+  color:var(--cream);
+  font-family:'Poppins',sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+.display,.section-head h2,.feature h3,.service-card h3,.brand-text{
+  font-family:'Bebas Neue',sans-serif;font-weight:400;letter-spacing:1px;
+}
+.hero h1,.mega{font-family:'Anton',sans-serif;font-weight:400;letter-spacing:1px;}
+.script{font-family:'Dancing Script',cursive;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+ul{list-style:none;}
+.container{max-width:1240px;margin:0 auto;padding:0 22px;}
+
+/* ===== BUTTONS ===== */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 30px;border-radius:10px;
+  font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;
+  letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:none;
+  transition:transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+}
+.btn svg{width:18px;height:18px;}
+.btn-wood{background:var(--wood);color:#1a1a1a;}
+.btn-wood:hover{background:#c9986a;transform:translateY(-3px);box-shadow:0 10px 24px rgba(184,134,85,.3);}
+.btn-outline{background:transparent;color:var(--cream);border:1.5px solid rgba(245,242,236,.45);}
+.btn-outline:hover{background:var(--cream);color:var(--black);transform:translateY(-3px);}
+.btn-wa{background:var(--dark-green);color:var(--cream);}
+.btn-wa:hover{background:var(--olive);transform:translateY(-3px);}
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position:fixed;top:0;left:0;width:100%;height:var(--topbar-h);
+  background:var(--dark-green);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:500;letter-spacing:.5px;color:var(--cream);
+  z-index:1001;gap:8px;
+}
+.topbar svg{width:15px;height:15px;}
+
+/* ===== HEADER ===== */
+header{
+  position:fixed;top:var(--topbar-h);left:0;width:100%;height:var(--header-h);
+  display:flex;align-items:center;z-index:1000;background:transparent;
+  transition:background .35s ease, box-shadow .35s ease;
+}
+header.scrolled{background:rgba(15,15,15,.95);backdrop-filter:blur(12px);box-shadow:0 4px 20px rgba(0,0,0,.45);}
+header .container{display:flex;align-items:center;justify-content:space-between;width:100%;}
+.brand{display:flex;align-items:center;gap:13px;}
+.monogram{
+  width:48px;height:48px;border-radius:50%;
+  border:2px solid var(--wood);color:var(--wood);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Anton',sans-serif;font-size:19px;letter-spacing:1px;flex-shrink:0;
+}
+.brand-text{line-height:.92;font-size:22px;color:var(--cream);}
+.brand-text span{display:block;color:var(--wood);font-size:14px;letter-spacing:5px;}
+.nav-links{display:flex;gap:30px;align-items:center;}
+.nav-links a{font-size:14px;font-weight:500;position:relative;padding:4px 0;transition:color .25s;}
+.nav-links a::after{content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--wood);transition:width .3s;}
+.nav-links a:hover{color:var(--wood);}
+.nav-links a:hover::after{width:100%;}
+.nav-links li:last-child{display:none;}
+.header-cta{margin-left:6px;}
+
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:1100;}
+.burger span{width:27px;height:2.5px;background:var(--cream);border-radius:2px;transition:.3s;}
+.burger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+.burger.open span:nth-child(2){opacity:0;}
+.burger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;min-height:100vh;display:flex;align-items:center;
+  padding:calc(var(--topbar-h) + var(--header-h) + 30px) 22px 70px;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(90deg,rgba(15,15,15,.88) 0%,rgba(15,15,15,.6) 55%,rgba(15,15,15,.4) 100%),
+    url('images/hero.jpg') center/cover;
+}
+.hero-content{max-width:640px;}
+.hero h1{font-size:clamp(70px,15vw,150px);color:var(--cream);line-height:.86;margin-bottom:22px;}
+.hero h1 .l2{color:var(--cream);}
+.hero .accent-line{width:90px;height:4px;background:var(--wood);margin-bottom:22px;border-radius:2px;}
+.hero .subtitle{
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,3vw,30px);
+  color:var(--wood);letter-spacing:2px;line-height:1.1;margin-bottom:14px;
+}
+.hero .tagline{font-family:'Dancing Script',cursive;font-size:clamp(22px,3.5vw,30px);color:rgba(245,242,236,.92);margin-bottom:34px;font-weight:600;}
+.hero-buttons{display:flex;gap:14px;flex-wrap:wrap;}
+
+/* ===== VALUES BAND ===== */
+.values{background:var(--dark-green);padding:34px 0;}
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.value{
+  text-align:center;padding:6px 24px;position:relative;
+}
+.value + .value::before{
+  content:'';position:absolute;left:0;top:10%;height:80%;width:1px;background:rgba(245,242,236,.18);
+}
+.value .ico{color:var(--wood);margin-bottom:12px;display:flex;justify-content:center;}
+.value .ico svg{width:34px;height:34px;}
+.value h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:var(--cream);margin-bottom:5px;}
+.value p{font-size:12.5px;color:rgba(245,242,236,.7);font-weight:300;line-height:1.4;}
+
+/* ===== SECTION HEAD ===== */
+section{padding:90px 0;}
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:42px;gap:20px;flex-wrap:wrap;}
+.section-head .left .eyebrow{display:flex;align-items:center;gap:10px;color:var(--wood);font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
+.section-head .left .eyebrow::before{content:'';width:34px;height:2px;background:var(--wood);display:inline-block;}
+.section-head h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,5vw,52px);color:var(--cream);line-height:1;}
+.section-head .more{display:inline-flex;align-items:center;gap:8px;color:var(--wood);font-weight:600;font-size:13px;letter-spacing:2px;text-transform:uppercase;transition:gap .25s;}
+.section-head .more:hover{gap:14px;}
+.section-center{text-align:center;display:block;}
+.section-center .eyebrow{justify-content:center;}
+.section-center .eyebrow::before{display:none;}
+.section-center p.sub{color:rgba(245,242,236,.65);font-weight:300;margin-top:14px;}
+
+/* ===== PRESTATIONS ===== */
+.services{background:linear-gradient(180deg,#0F0F0F,#12140e);}
+.services-row{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+.service-card{
+  background:#161616;border-radius:14px;overflow:hidden;
+  border:1px solid rgba(245,242,236,.07);
+  transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+}
+.service-card:hover{transform:translateY(-8px);box-shadow:0 18px 38px rgba(0,0,0,.55);border-color:rgba(184,134,85,.4);}
+.service-card .img-wrap{height:170px;overflow:hidden;}
+.service-card .img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+.service-card:hover .img-wrap img{transform:scale(1.08);}
+.service-card .content{padding:18px 16px 22px;text-align:center;}
+.service-card h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--cream);margin-bottom:8px;min-height:46px;display:flex;align-items:center;justify-content:center;}
+.service-card .price{font-family:'Bebas Neue',sans-serif;color:var(--wood);font-size:28px;letter-spacing:1px;}
+
+/* ===== AVIS ===== */
+.reviews{position:relative;background:#0d0d0d;}
+.reviews::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(rgba(13,13,13,.92),rgba(13,13,13,.92)),
+    url('images/salon-fauteuils-2.jpg') center/cover;
+  z-index:0;
+}
+.reviews .container{position:relative;z-index:1;}
+.reviews-inner{display:grid;grid-template-columns:0.85fr 1.15fr;gap:40px;align-items:center;}
+.rating-box{text-align:left;}
+.rating-box .eyebrow{color:var(--wood);font-weight:600;font-size:13px;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;}
+.rating-box .stars{color:var(--wood);font-size:30px;letter-spacing:4px;}
+.rating-box .score{font-family:'Anton',sans-serif;font-size:58px;color:var(--cream);line-height:1;margin:8px 0 2px;}
+.rating-box .score small{font-size:24px;color:rgba(245,242,236,.55);}
+.rating-box .count{color:rgba(245,242,236,.6);font-weight:300;margin-bottom:16px;}
+.google-logo{font-family:'Poppins',sans-serif;font-weight:600;font-size:22px;letter-spacing:.5px;}
+.google-logo .b{color:#4285F4;}.google-logo .r{color:#EA4335;}.google-logo .y{color:#FBBC05;}.google-logo .g{color:#34A853;}
+.reviews-slider{position:relative;min-height:200px;}
+.review-slide{
+  position:absolute;inset:0;opacity:0;transition:opacity .6s ease;pointer-events:none;
+  background:rgba(22,22,22,.92);border:1px solid rgba(184,134,85,.18);border-radius:18px;padding:32px 30px;
+}
+.review-slide.active{opacity:1;position:relative;pointer-events:auto;}
+.review-slide .qmark{font-family:'Anton',sans-serif;color:var(--wood);font-size:46px;line-height:.6;}
+.review-slide .quote{font-size:16px;color:rgba(245,242,236,.9);font-weight:300;margin:6px 0 18px;}
+.review-slide .meta{display:flex;justify-content:space-between;align-items:center;}
+.review-slide .author{font-weight:600;color:var(--cream);}
+.review-slide .when{font-size:13px;color:rgba(245,242,236,.5);}
+.review-dots{display:flex;gap:9px;margin-top:18px;}
+.review-dots button{width:10px;height:10px;border-radius:50%;border:none;background:rgba(245,242,236,.25);cursor:pointer;transition:.3s;padding:0;}
+.review-dots button.active{background:var(--wood);transform:scale(1.2);}
+
+/* ===== GALERIE ===== */
+.gallery{background:var(--black);}
+.masonry{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.masonry .g-item{overflow:hidden;border-radius:14px;cursor:pointer;}
+.masonry .g-item img{width:100%;height:300px;object-fit:cover;display:block;transition:transform .5s ease, filter .5s ease;filter:saturate(.97);}
+.masonry .g-item:hover img{transform:scale(1.06);filter:saturate(1.12);}
+.masonry .g-item.tall{grid-row:span 2;}
+.masonry .g-item.tall img{height:616px;}
+
+/* ===== FORM ===== */
+.book-form{background:linear-gradient(180deg,#12140e,#0F0F0F);}
+.form-wrap{max-width:680px;margin:0 auto;background:#161616;border:1px solid rgba(184,134,85,.18);border-radius:22px;padding:42px 38px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.field{display:flex;flex-direction:column;gap:7px;}
+.field.full{grid-column:1 / -1;}
+.field label{font-size:13px;font-weight:500;color:rgba(245,242,236,.75);}
+.field label .req{color:var(--wood);}
+.field input,.field select,.field textarea{
+  background:#0f0f0f;border:1px solid rgba(245,242,236,.12);border-radius:10px;
+  padding:13px 15px;color:var(--cream);font-family:'Poppins',sans-serif;font-size:15px;
+  transition:border-color .25s, box-shadow .25s;
+}
+.field input::placeholder,.field textarea::placeholder{color:rgba(245,242,236,.35);}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--wood);box-shadow:0 0 0 3px rgba(184,134,85,.18);}
+.field textarea{resize:vertical;min-height:90px;}
+.field select option{background:#161616;color:var(--cream);}
+.form-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;}
+.form-actions .btn{flex:1;min-width:200px;}
+.form-note{font-size:12.5px;color:rgba(245,242,236,.5);font-weight:300;margin-top:18px;text-align:center;}
+.form-note a{color:var(--wood);text-decoration:underline;}
+.form-feedback{display:none;margin-top:18px;padding:14px 18px;border-radius:12px;background:rgba(85,107,77,.25);border:1px solid var(--olive);color:var(--cream);font-size:14px;text-align:center;}
+.form-feedback.show{display:block;}
+
+/* ===== RÉSERVATION BAND ===== */
+.booking{background:var(--olive);text-align:center;}
+.booking h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6vw,62px);color:var(--cream);line-height:1;margin-bottom:14px;}
+.booking p{color:rgba(245,242,236,.88);font-weight:300;margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto;}
+.booking .btn-giant{padding:20px 50px;font-size:16px;background:var(--black);color:var(--cream);}
+.booking .btn-giant:hover{background:var(--wood);color:#1a1a1a;transform:translateY(-4px);}
+.qr-code{margin-top:32px;display:inline-flex;flex-direction:column;align-items:center;gap:9px;}
+.qr-code img{width:124px;height:124px;border-radius:12px;border:5px solid var(--cream);background:var(--cream);}
+.qr-code span{font-size:13px;color:rgba(245,242,236,.9);font-weight:300;}
+
+/* ===== CONTACT ===== */
+.contact{background:var(--black);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:46px;align-items:stretch;}
+.contact-info h3{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--wood);margin-bottom:22px;letter-spacing:1px;}
+.contact-info .info-row{display:flex;gap:14px;margin-bottom:18px;align-items:flex-start;}
+.contact-info .info-row .ico{font-size:19px;flex-shrink:0;}
+.contact-info .info-row strong{display:block;color:var(--cream);font-weight:600;margin-bottom:2px;}
+.contact-info .info-row p{color:rgba(245,242,236,.7);font-weight:300;font-size:15px;}
+.contact-info .info-row a{color:rgba(245,242,236,.7);}
+.contact-info .info-row a:hover{color:var(--wood);}
+.contact-buttons{display:flex;gap:11px;flex-wrap:wrap;margin-top:28px;}
+.contact-buttons .btn{padding:13px 22px;font-size:13px;}
+.btn-green-wa{background:#25d366;color:#fff;}
+.btn-green-wa:hover{background:#1da851;color:#fff;transform:translateY(-3px);}
+.map-wrap{border-radius:18px;overflow:hidden;min-height:420px;}
+.map-wrap iframe{width:100%;height:100%;min-height:420px;border:0;}
+
+/* ===== FOOTER ===== */
+footer{background:#0a0a0a;padding:56px 0 110px;}
+.footer-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;margin-bottom:36px;}
+.footer-brand .brand{margin-bottom:12px;}
+.footer-brand p{color:rgba(245,242,236,.55);font-weight:300;font-size:14px;max-width:280px;}
+.footer-col h4{color:var(--wood);font-weight:600;margin-bottom:15px;font-size:14px;letter-spacing:1px;}
+.footer-col a{display:block;color:rgba(245,242,236,.65);font-weight:300;font-size:14px;margin-bottom:9px;transition:color .25s;}
+.footer-col a:hover{color:var(--wood);}
+.socials{display:flex;gap:12px;}
+.socials a{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(245,242,236,.08);font-size:18px;transition:.3s;}
+.socials a:hover{background:var(--wood);color:var(--black);transform:translateY(-3px);}
+.footer-bottom{border-top:1px solid rgba(245,242,236,.08);padding-top:22px;text-align:center;color:rgba(245,242,236,.45);font-size:13px;font-weight:300;}
+
+/* ===== MOBILE STICKY BAR ===== */
+.mobile-bar{display:none;position:fixed;left:0;bottom:0;width:100%;z-index:998;padding:12px;gap:10px;background:rgba(10,10,10,.96);backdrop-filter:blur(10px);box-shadow:0 -4px 20px rgba(0,0,0,.5);}
+.mobile-bar .btn{flex:1;padding:14px;font-size:13px;}
+
+/* ===== FLOATING WA (desktop) ===== */
+.float-wa{position:fixed;bottom:25px;right:25px;width:58px;height:58px;border-radius:50%;background:#25d366;color:#fff;display:flex;align-items:center;justify-content:center;z-index:997;box-shadow:0 6px 20px rgba(0,0,0,.35);transition:transform .3s;}
+.float-wa svg{width:30px;height:30px;}
+.float-wa:hover{transform:scale(1.1);}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1000px){
+  .values-grid{grid-template-columns:repeat(2,1fr);gap:26px 0;}
+  .value:nth-child(3)::before,.value:nth-child(2)::before{}
+  .services-row{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:900px){
+  .nav-links{position:fixed;top:0;right:0;height:100vh;width:78%;max-width:320px;flex-direction:column;justify-content:center;gap:26px;background:rgba(15,15,15,.98);backdrop-filter:blur(14px);transform:translateX(100%);transition:transform .4s ease;padding:40px;}
+  .nav-links.open{transform:translateX(0);}
+  .nav-links a{font-size:19px;}
+  .nav-links li:last-child{display:block;}
+  .header-cta{display:none;}
+  .burger{display:flex;}
+  .reviews-inner{grid-template-columns:1fr;gap:30px;}
+  .rating-box{text-align:center;}
+  .contact-grid{grid-template-columns:1fr;}
+  .masonry{grid-template-columns:repeat(2,1fr);}
+  .mobile-bar{display:flex;}
+  .float-wa{display:none;}
+  section{padding:64px 0;}
+}
+@media(max-width:680px){
+  .values-grid{grid-template-columns:1fr;}
+  .value + .value::before{display:none;}
+  .value{border-top:1px solid rgba(245,242,236,.12);padding-top:22px;}
+  .values-grid .value:first-child{border-top:none;padding-top:6px;}
+  .services-row{grid-template-columns:repeat(2,1fr);}
+  .form-grid{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .masonry{grid-template-columns:1fr;}
+  .masonry .g-item.tall{grid-row:span 1;}
+  .masonry .g-item.tall img{height:300px;}
+  .hero-buttons{width:100%;}
+  .hero-buttons .btn{width:100%;}
+  .brand-text{font-size:19px;}
+  .brand-text span{font-size:12px;letter-spacing:4px;}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto !important;}
+  .reveal{opacity:1;transform:none;transition:none;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+  Prise de rendez-vous en ligne 24h/24 et 7j/7
+</div>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <div class="container">
+    <a href="#accueil" class="brand" aria-label="Rituel Barber - Accueil">
+      <span class="monogram">RB</span>
+      <span class="brand-text">RITUEL<span>BARBER</span></span>
+    </a>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#salon">Le Salon</a></li>
+        <li><a href="#prestations">Prestations</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#avis">Avis</a></li>
+        <li><a href="#reserver">Réserver</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a class="btn btn-wood" href="https://www.planity.com/rituel-barber-91170-viry-chatillon" target="_blank" rel="noopener">Prendre rendez-vous</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn btn-wood header-cta" href="https://www.planity.com/rituel-barber-91170-viry-chatillon" target="_blank" rel="noopener">Prendre rendez-vous</a>
+
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="accueil">
+  <div class="hero-content">
+    <h1>RITUEL<br><span class="l2">BARBER</span></h1>
+    <div class="accent-line"></div>
+    <p class="subtitle">BARBIER &amp; COIFFEUR<br>HOMME À VIRY-CHÂTILLON</p>
+    <p class="tagline">Plus qu'une coupe, un vrai moment.</p>
+    <div class="hero-buttons">
+      <a class="btn btn-wood" href="https://www.planity.com/rituel-barber-91170-viry-chatillon" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Prendre rendez-vous
+      </a>
+      <a class="btn btn-outline" href="#contact">Nous contacter</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== VALEURS ===== -->
+<section class="values" id="salon" style="padding:38px 0;">
+  <div class="container">
+    <div class="values-grid">
+      <div class="value reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></span>
+        <h3>Savoir-faire</h3>
+        <p>Techniques modernes et traditionnelles</p>
+      </div>
+      <div class="value reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"/><path d="M3 11a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3H3z"/><path d="M5 18v2M19 18v2M3 14v4h18v-4"/></svg></span>
+        <h3>Expérience</h3>
+        <p>Un moment de détente rien que pour vous</p>
+      </div>
+      <div class="value reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6v3H9z"/><path d="M10 5v2.5L8 11v9a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-9l-2-3.5V5"/><line x1="8" y1="14" x2="16" y2="14"/></svg></span>
+        <h3>Produits premium</h3>
+        <p>Produits de qualité pour vos cheveux et barbe</p>
+      </div>
+      <div class="value reveal">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9-8 11-4.5-2-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h3>Exigence</h3>
+        <p>Des coupes précises et finitions parfaites</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRESTATIONS ===== -->
+<section class="services" id="prestations">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="left">
+        <h2>Nos prestations</h2>
+      </div>
+      <a class="more" href="https://www.planity.com/rituel-barber-91170-viry-chatillon" target="_blank" rel="noopener">Voir toutes
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <div class="services-row">
+      <article class="service-card reveal">
+        <div class="img-wrap"><img src="images/coupe.jpg" alt="Coupe classique chez Rituel Barber" loading="lazy" width="600" height="450" /></div>
+        <div class="content"><h3>Coupe Classique</h3><span class="price">25€</span></div>
+      </article>
+      <article class="service-card reveal">
+        <div class="img-wrap"><img src="images/coupe-barbe.jpg" alt="Coupe et barbe chez Rituel Barber" loading="lazy" width="600" height="450" /></div>
+        <div class="content"><h3>Coupe &amp; Barbe</h3><span class="price">40€</span></div>
+      </article>
+      <article class="service-card reveal">
+        <div class="img-wrap"><img src="images/fauteuil.jpg" alt="Taille de barbe chez Rituel Barber" loading="lazy" width="600" height="450" /></div>
+        <div class="content"><h3>Taille de Barbe</h3><span class="price">20€</span></div>
+      </article>
+      <article class="service-card reveal">
+        <div class="img-wrap"><img src="images/salon-accueil.jpg" alt="Soin du visage chez Rituel Barber" loading="lazy" width="600" height="450" /></div>
+        <div class="content"><h3>Soin Visage</h3><span class="price">30€</span></div>
+      </article>
+      <article class="service-card reveal">
+        <div class="img-wrap"><img src="images/degrade.jpg" alt="Dégradé américain chez Rituel Barber" loading="lazy" width="600" height="450" /></div>
+        <div class="content"><h3>Dégradé Américain</h3><span class="price">30€</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AVIS ===== -->
+<section class="reviews" id="avis">
+  <div class="container">
+    <div class="reviews-inner">
+      <div class="rating-box reveal">
+        <div class="eyebrow">Avis clients</div>
+        <div class="stars" aria-hidden="true">★★★★★</div>
+        <div class="score">4,9 <small>/ 5</small></div>
+        <div class="count">+120 avis</div>
+        <div class="google-logo"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></div>
+      </div>
+
+      <div>
+        <div class="reviews-slider" id="reviewsSlider">
+          <div class="review-slide active">
+            <div class="qmark">&ldquo;</div>
+            <p class="quote">Super accueil, coupe parfaite et barbe au top ! Le salon est propre, l'ambiance est vraiment agréable. Je recommande à 100%.</p>
+            <div class="meta"><span class="author">Yanis B.</span><span class="when">il y a 1 mois</span></div>
+          </div>
+          <div class="review-slide">
+            <div class="qmark">&ldquo;</div>
+            <p class="quote">Excellent barbier, très professionnel. Dégradé impeccable et vrai souci du détail. Je ne vais plus ailleurs.</p>
+            <div class="meta"><span class="author">Karim B.</span><span class="when">il y a 2 mois</span></div>
+          </div>
+          <div class="review-slide">
+            <div class="qmark">&ldquo;</div>
+            <p class="quote">Ambiance premium et coupe au top. Omar est à l'écoute et le résultat est toujours parfait.</p>
+            <div class="meta"><span class="author">Thomas L.</span><span class="when">il y a 3 mois</span></div>
+          </div>
+        </div>
+        <div class="review-dots" id="reviewDots" role="tablist" aria-label="Avis clients"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALERIE ===== -->
+<section class="gallery" id="galerie">
+  <div class="container">
+    <div class="section-head section-center reveal">
+      <div class="left">
+        <span class="eyebrow">Galerie</span>
+        <h2>L'ambiance du salon</h2>
+        <p class="sub">Découvrez notre univers et nos réalisations.</p>
+      </div>
+    </div>
+    <div class="masonry">
+      <div class="g-item"><img src="images/salon-fauteuils.jpg" alt="Fauteuils de barbier du salon Rituel Barber" loading="lazy" /></div>
+      <div class="g-item"><img src="images/salon-accueil.jpg" alt="Espace accueil et produits du salon Rituel Barber" loading="lazy" /></div>
+      <div class="g-item"><img src="images/degrade.jpg" alt="Dégradé américain réalisé chez Rituel Barber" loading="lazy" /></div>
+      <div class="g-item"><img src="images/coupe.jpg" alt="Coupe homme réalisée chez Rituel Barber" loading="lazy" /></div>
+      <div class="g-item"><img src="images/fauteuil.jpg" alt="Fauteuil barbier premium chez Rituel Barber" loading="lazy" /></div>
+      <div class="g-item"><img src="images/coupe-barbe.jpg" alt="Coupe et barbe réalisées chez Rituel Barber" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FORMULAIRE RÉSERVATION ===== -->
+<section class="book-form" id="reserver">
+  <div class="container">
+    <div class="section-head section-center reveal">
+      <div class="left">
+        <span class="eyebrow">Réservation</span>
+        <h2>Demande de rendez-vous</h2>
+        <p class="sub">Remplissez le formulaire, nous vous confirmons votre créneau rapidement.</p>
+      </div>
+    </div>
+
+    <div class="form-wrap reveal">
+      <form id="bookingForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="prenom">Prénom <span class="req">*</span></label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required autocomplete="given-name" />
+          </div>
+          <div class="field">
+            <label for="nom">Nom <span class="req">*</span></label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required autocomplete="family-name" />
+          </div>
+          <div class="field">
+            <label for="tel">Téléphone <span class="req">*</span></label>
+            <input type="tel" id="tel" name="tel" placeholder="06 00 00 00 00" required autocomplete="tel" pattern="[0-9 +().-]{6,}" />
+          </div>
+          <div class="field">
+            <label for="prestation">Prestation <span class="req">*</span></label>
+            <select id="prestation" name="prestation" required>
+              <option value="" disabled selected>Choisir une prestation</option>
+              <option>Coupe Classique</option>
+              <option>Coupe &amp; Barbe</option>
+              <option>Taille de Barbe</option>
+              <option>Soin Visage</option>
+              <option>Dégradé Américain</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date">Date souhaitée <span class="req">*</span></label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="field">
+            <label for="creneau">Créneau horaire <span class="req">*</span></label>
+            <select id="creneau" name="creneau" required>
+              <option value="" disabled selected>Choisir un horaire</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="message">Message (optionnel)</label>
+            <textarea id="message" name="message" placeholder="Une précision sur votre demande ?"></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-green-wa" data-mode="whatsapp">Envoyer via WhatsApp</button>
+          <button type="submit" class="btn btn-outline" data-mode="email">Envoyer par email</button>
+        </div>
+
+        <div class="form-feedback" id="formFeedback"></div>
+
+        <p class="form-note">Le salon est ouvert du lundi au samedi de 10h à 20h. Pour une confirmation immédiate, réservez directement sur <a href="https://www.planity.com/rituel-barber-91170-viry-chatillon" target="_blank" rel="noopener">Planity</a>.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RÉSERVATION BAND ===== -->
+<section class="booking">
+  <div class="container reveal">
+    <h2>Réservez votre prochain rendez-vous</h2>
+    <p>En quelques clics, choisissez votre prestation et votre créneau en ligne.</p>
+    <a class="btn btn-giant" href="https://www.planity.com/rituel-barber-91170-viry-chatillon" target="_blank" rel="noopener">Prendre rendez-vous sur Planity</a>
+    <div class="qr-code">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.planity.com/rituel-barber-91170-viry-chatillon" alt="QR Code pour réserver sur Planity" loading="lazy" width="124" height="124" />
+      <span>Scannez pour réserver</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="section-head section-center reveal">
+      <div class="left">
+        <span class="eyebrow">Contact</span>
+        <h2>Venez nous voir</h2>
+      </div>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <h3>Informations</h3>
+        <div class="info-row"><span class="ico">📍</span><div><strong>Adresse</strong><p>39-43 Avenue du Général de Gaulle, 91170 Viry-Châtillon</p></div></div>
+        <div class="info-row"><span class="ico">📞</span><div><strong>Téléphone</strong><p><a href="tel:+33614340113">06 14 34 01 13</a></p></div></div>
+        <div class="info-row"><span class="ico">✉️</span><div><strong>Email</strong><p><a href="mailto:rituelcoiffure91@gmail.com">rituelcoiffure91@gmail.com</a></p></div></div>
+        <div class="info-row"><span class="ico">🕒</span><div><strong>Horaires</strong><p>Du lundi au samedi : 10h – 20h</p></div></div>
+        <div class="info-row"><span class="ico">📸</span><div><strong>Instagram</strong><p>@rituel_barber</p></div></div>
+
+        <div class="contact-buttons">
+          <a class="btn btn-wood" href="tel:+33614340113">Appeler</a>
+          <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&destination=39-43+Avenue+du+General+de+Gaulle+91170+Viry-Chatillon" target="_blank" rel="noopener">Itinéraire</a>
+          <a class="btn btn-green-wa" href="https://wa.me/33614340113" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="map-wrap reveal">
+        <iframe title="Localisation Rituel Barber sur Google Maps" src="https://www.google.com/maps?q=39-43+Avenue+du+General+de+Gaulle+91170+Viry-Chatillon&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#accueil" class="brand">
+          <span class="monogram">RB</span>
+          <span class="brand-text">RITUEL<span>BARBER</span></span>
+        </a>
+        <p>Barber shop premium à Viry-Châtillon. Coupe, barbe et soins dans une ambiance élégante.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="#accueil">Accueil</a>
+        <a href="#salon">Le Salon</a>
+        <a href="#prestations">Prestations</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Informations</h4>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
+        <a href="https://www.planity.com/rituel-barber-91170-viry-chatillon" target="_blank" rel="noopener">Réservation</a>
+      </div>
+      <div class="footer-col">
+        <h4>Suivez-nous</h4>
+        <div class="socials">
+          <a href="https://www.instagram.com/rituel_barber" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+          <a href="https://wa.me/33614340113" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+          <a href="tel:+33614340113" aria-label="Téléphone">📞</a>
+          <a href="mailto:rituelcoiffure91@gmail.com" aria-label="Email">✉️</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> Rituel Barber — Tous droits réservés.</div>
+  </div>
+</footer>
+
+<!-- ===== MOBILE STICKY BAR ===== -->
+<div class="mobile-bar">
+  <a class="btn btn-wa" href="https://wa.me/33614340113" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.42 1.31-1.95 1.36-.5.05-1.13.07-1.83-.11-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.82-4.2-4.97-4.4-.15-.2-1.19-1.58-1.19-3.01s.75-2.13 1.02-2.43c.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.82 2.02.89 2.17.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.29.76 1.25 1.62 2.02 1.12 1 2.06 1.31 2.35 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.19-.29.39-.24.66-.15.27.1 1.69.8 1.98.94.29.15.49.22.56.34.07.12.07.7-.17 1.38z"/></svg>
+    WhatsApp
+  </a>
+  <a class="btn btn-wood" href="https://www.planity.com/rituel-barber-91170-viry-chatillon" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Prendre rendez-vous
+  </a>
+</div>
+
+<!-- ===== FLOATING WA (desktop) ===== -->
+<a class="float-wa" href="https://wa.me/33614340113" target="_blank" rel="noopener" aria-label="Contacter sur WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.16c-.24.68-1.42 1.31-1.95 1.36-.5.05-1.13.07-1.83-.11-.42-.13-.96-.31-1.66-.61-2.92-1.26-4.82-4.2-4.97-4.4-.15-.2-1.19-1.58-1.19-3.01s.75-2.13 1.02-2.43c.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.59.82 2.02.89 2.17.07.15.12.32.02.51-.1.2-.15.32-.29.49-.15.17-.31.39-.44.52-.15.15-.3.31-.13.6.17.29.76 1.25 1.62 2.02 1.12 1 2.06 1.31 2.35 1.46.29.15.46.12.63-.07.17-.2.73-.85.92-1.14.19-.29.39-.24.66-.15.27.1 1.69.8 1.98.94.29.15.49.22.56.34.07.12.07.7-.17 1.38z"/></svg>
+</a>
+
+<script>
+(function(){
+  "use strict";
+  var header = document.getElementById('header');
+  function onScroll(){ if(window.scrollY > 30){header.classList.add('scrolled');}else{header.classList.remove('scrolled');} }
+  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  var burger = document.getElementById('burger');
+  var navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      navLinks.classList.remove('open'); burger.classList.remove('open');
+      burger.setAttribute('aria-expanded','false');
+    });
+  });
+
+  var reveals = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target);} });
+    }, {threshold:0.15});
+    reveals.forEach(function(el){ io.observe(el); });
+  } else { reveals.forEach(function(el){ el.classList.add('visible'); }); }
+
+  var slides = document.querySelectorAll('.review-slide');
+  var dotsWrap = document.getElementById('reviewDots');
+  var current = 0, timer;
+  slides.forEach(function(_, i){
+    var b = document.createElement('button');
+    b.setAttribute('role','tab'); b.setAttribute('aria-label','Avis ' + (i+1));
+    if(i===0) b.classList.add('active');
+    b.addEventListener('click', function(){ goTo(i); resetTimer(); });
+    dotsWrap.appendChild(b);
+  });
+  var dots = dotsWrap.querySelectorAll('button');
+  function goTo(i){
+    slides[current].classList.remove('active'); if(dots[current]) dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active'); if(dots[current]) dots[current].classList.add('active');
+  }
+  function next(){ goTo((current+1) % slides.length); }
+  function resetTimer(){ clearInterval(timer); timer = setInterval(next, 5000); }
+  if(slides.length > 1){ resetTimer(); }
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Formulaire
+  var form = document.getElementById('bookingForm');
+  if(form){
+    var SALON_PHONE_WA = '33614340113';
+    var SALON_EMAIL = 'rituelcoiffure91@gmail.com';
+    var creneau = document.getElementById('creneau');
+    for(var h=10; h<20; h++){
+      ['00','30'].forEach(function(m){
+        var v = (h<10?'0'+h:h) + 'h' + m;
+        var opt = document.createElement('option'); opt.value = v; opt.textContent = v; creneau.appendChild(opt);
+      });
+    }
+    var dateInput = document.getElementById('date');
+    var today = new Date();
+    dateInput.min = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+
+    var feedback = document.getElementById('formFeedback');
+    var chosenMode = 'whatsapp';
+    form.querySelectorAll('button[type="submit"]').forEach(function(btn){
+      btn.addEventListener('click', function(){ chosenMode = btn.getAttribute('data-mode'); });
+    });
+    function fmtDate(v){ if(!v) return ''; var p = v.split('-'); return p[2]+'/'+p[1]+'/'+p[0]; }
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      if(!form.checkValidity()){ form.reportValidity(); return; }
+      var data = {
+        prenom: document.getElementById('prenom').value.trim(),
+        nom: document.getElementById('nom').value.trim(),
+        tel: document.getElementById('tel').value.trim(),
+        prestation: document.getElementById('prestation').value,
+        date: fmtDate(document.getElementById('date').value),
+        creneau: document.getElementById('creneau').value,
+        message: document.getElementById('message').value.trim()
+      };
+      var lines = ['Bonjour, je souhaite réserver un rendez-vous chez Rituel Barber :','',
+        'Nom : ' + data.prenom + ' ' + data.nom,'Téléphone : ' + data.tel,
+        'Prestation : ' + data.prestation,'Date : ' + data.date,'Créneau : ' + data.creneau];
+      if(data.message){ lines.push('Message : ' + data.message); }
+      var body = lines.join('\n');
+      if(chosenMode === 'email'){
+        window.location.href = 'mailto:' + SALON_EMAIL + '?subject=' + encodeURIComponent('Demande de RDV - ' + data.prenom + ' ' + data.nom) + '&body=' + encodeURIComponent(body);
+      } else {
+        window.open('https://wa.me/' + SALON_PHONE_WA + '?text=' + encodeURIComponent(body), '_blank');
+      }
+      feedback.textContent = 'Merci ' + data.prenom + ' ! Votre demande a été préparée. Validez l\'envoi dans ' + (chosenMode === 'email' ? 'votre messagerie' : 'WhatsApp') + ' pour finaliser.';
+      feedback.classList.add('show');
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
