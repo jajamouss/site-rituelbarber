@@ -513,7 +513,7 @@ function drawStats() {
       </div>`).join('');
     body += `<div class="card feed">${rows || '<div class="empty">Aucune prestation ce jour-là.</div>'}</div>`;
   } else {
-    body += chartHTML(st) + splitHTML(st);
+    body += chartHTML(st) + splitHTML(st) + insightHTML(st);
   }
 
   document.getElementById('statzone').innerHTML = body;
@@ -529,15 +529,26 @@ function chartHTML(st) {
   const cols = series.map((s, i) => {
     const d = new Date(s.date + 'T12:00:00');
     const lbl = isMonth ? (d.getDate() === 1 || d.getDate() % 5 === 0 ? d.getDate() : '') : DAY_S[d.getDay()];
-    const hot = s.date === today;
-    const showVal = s.total > 0 && (hot || i === maxIdx) && !isMonth;
-    return `<div class="bcol" title="${dateLabel(s.date)} : ${euro(s.total)}">
+    const isToday = s.date === today;
+    const showVal = s.total > 0 && (isToday || i === maxIdx) && !isMonth;
+    return `<div class="bcol${isToday ? ' today' : ''}" title="${dateLabel(s.date)} : ${euro(s.total)}">
       ${showVal ? `<span class="bv num">${Math.round(s.total)}</span>` : ''}
-      <div class="bar${hot ? ' hot' : ''}" style="height:${Math.max(2, Math.round(s.total * 88 / max))}px"></div>
+      <div class="bar${s.total === 0 ? ' zero' : ''}" style="height:${Math.max(2, Math.round(s.total * 82 / max))}px"></div>
       <span class="bl">${lbl}</span>
     </div>`;
   }).join('');
-  return `<div class="card chart-card" style="margin-bottom:12px"><h5>Recette par jour</h5><div class="bars">${cols}</div></div>`;
+  return `<div class="card chart-card" style="margin-bottom:12px"><h5>Recette par jour</h5><div class="bars${isMonth ? ' dense' : ''}">${cols}</div></div>`;
+}
+
+function insightHTML(st) {
+  if (!st.split.length || st.total <= 0) return '';
+  const top = st.split[0];
+  const periodTxt = st.period === 'week' ? 'de ta semaine' : 'de ton mois';
+  return `<div class="insight">
+    <span class="pc">%</span>
+    <p>La prestation <b>${esc(top.name)}</b> représente <b>${top.share}&nbsp;%</b> ${periodTxt}
+    (${euro(top.total)} sur ${top.count} client${top.count > 1 ? 's' : ''}).</p>
+  </div>`;
 }
 
 function splitHTML(st) {

@@ -8,6 +8,8 @@
   --gold:#A8863B;
   --good:#3E6B34; --good-bg:#E5EBD9; --good-line:#C6D2AF;
   --bad:#A3392C; --bad-bg:#F0DFDB;
+  /* Graphiques : bleu turquoise (demande client), faces 3D claire/foncée */
+  --chart:#0F97A5; --chart-top:#43B3BD; --chart-side:#0A6B73;
   --disp:'Bebas Neue','Arial Narrow',Impact,sans-serif;
   --body:'Poppins',-apple-system,'Segoe UI',Roboto,sans-serif;
   --radius:14px;
@@ -209,24 +211,51 @@ input,select{font:inherit; color:inherit}
 .delta-up{color:var(--good); font-weight:600}
 .delta-down{color:var(--bad); font-weight:600}
 .kpis{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:12px 0}
-.kpi{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:11px 12px}
+.kpi{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:11px 12px; border-left:4px solid var(--chart)}
+.kpi:nth-child(2){border-left-color:var(--accent)}
 .kpi .k{font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--mut)}
 .kpi .x{font-size:17px; font-weight:600; margin-top:3px}
 
 /* ---------- graphiques ---------- */
 .chart-card h5{margin:0 0 14px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--mut); font-weight:600}
-.bars{display:flex; align-items:flex-end; gap:6px; height:120px}
+.bars{display:flex; align-items:flex-end; gap:9px; height:128px; --d:7px; padding-top:4px}
+.bars.dense{--d:3px; gap:4px}
 .bcol{flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; height:100%; justify-content:flex-end; min-width:0}
-.bar{width:100%; max-width:30px; border-radius:4px 4px 0 0; background:var(--vif); opacity:.42; min-height:2px; flex-shrink:0}
-.bar.hot{opacity:1}
+/* Barres 3D : face avant + dessus (skewX) + flanc droit (skewY) */
+.bar{width:100%; max-width:26px; background:var(--chart); min-height:2px; flex-shrink:0; position:relative}
+.bar::before{
+  content:""; position:absolute; left:0; top:calc(var(--d) * -1);
+  width:100%; height:var(--d); background:var(--chart-top);
+  transform:skewX(-45deg); transform-origin:0 100%;
+}
+.bar::after{
+  content:""; position:absolute; top:0; right:calc(var(--d) * -1);
+  width:var(--d); height:100%; background:var(--chart-side);
+  transform:skewY(-45deg); transform-origin:0 0;
+}
+.bar.zero{background:var(--line)}
+.bar.zero::before,.bar.zero::after{display:none}
 .bcol .bl{font-size:9.5px; color:var(--mut); white-space:nowrap}
-.bcol .bv{font-size:10.5px; font-weight:600}
+.bcol.today .bl{color:var(--accent); font-weight:700}
+.bcol .bv{font-size:10.5px; font-weight:600; margin-bottom:calc(var(--d) + 2px)}
 .split{display:flex; flex-direction:column; gap:11px}
 .srow{display:grid; grid-template-columns:minmax(90px,110px) 1fr 40px; gap:10px; align-items:center; font-size:12.5px}
 .srow .sl{white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .srow .track{height:9px; border-radius:5px; background:var(--bg); overflow:hidden}
-.srow .fill{height:100%; border-radius:5px; background:var(--vif)}
+.srow .fill{height:100%; border-radius:5px; background:var(--chart)}
 .srow .pv{text-align:right; color:var(--mut)}
+
+/* ---------- carte insight ---------- */
+.insight{
+  display:flex; align-items:center; gap:14px; background:var(--card);
+  border:1px solid var(--line); border-radius:var(--radius); padding:14px 16px; margin-top:12px;
+}
+.insight .pc{
+  width:40px; height:40px; border-radius:12px; background:var(--ink); color:var(--chart-top);
+  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px; flex-shrink:0;
+}
+.insight p{margin:0; font-size:13.5px; line-height:1.5}
+.insight b{color:var(--accent)}
 
 /* ---------- réglages ---------- */
 .note{
