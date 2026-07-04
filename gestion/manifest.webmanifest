@@ -1,0 +1,12 @@
+{
+  "name": "Rituel Barber Gestion",
+  "short_name": "Rituel Gestion",
+  "start_url": "/gestion/",
+  "scope": "/gestion/",
+  "display": "standalone",
+  "background_color": "#0e1713",
+  "theme_color": "#0e1713",
+  "icons": [
+    {"src": "../favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable"}
+  ]
+}
