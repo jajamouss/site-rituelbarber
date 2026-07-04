@@ -1,10 +1,12 @@
 /* Rituel Barber — Gestion · thème clair (crème / bois) */
 
+/* Palette tirée des photos du salon : murs olive, murs crème, marbre noir & or */
 :root{
-  --bg:#F3EFE6; --card:#FDFCF8; --line:#E0D9C8; --line-soft:#EAE4D6;
-  --ink:#1A1912; --mut:#75705F;
-  --accent:#96652C; --accent-soft:#96652C14; --vif:#B26A1F; --on-accent:#FBF7EE;
-  --good:#4C6B42; --good-bg:#E4EBDD; --good-line:#C4D2B8;
+  --bg:#F1EFE7; --card:#FCFBF6; --line:#DFDCCB; --line-soft:#E9E6D8;
+  --ink:#20241B; --mut:#6B6E5C;
+  --accent:#525E36; --accent-soft:#525E3614; --vif:#66802E; --on-accent:#F6F7EF;
+  --gold:#A8863B;
+  --good:#3E6B34; --good-bg:#E5EBD9; --good-line:#C6D2AF;
   --bad:#A3392C; --bad-bg:#F0DFDB;
   --disp:'Bebas Neue','Arial Narrow',Impact,sans-serif;
   --body:'Poppins',-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -188,7 +190,7 @@ input,select{font:inherit; color:inherit}
 /* ---------- dashboard ---------- */
 .hero-num{padding:16px 2px 6px}
 .hero-num .v{font-family:var(--disp); font-size:58px; line-height:1; letter-spacing:.02em}
-.hero-num .v small{font-size:30px; color:var(--accent)}
+.hero-num .v small{font-size:30px; color:var(--gold)} /* clin d'œil au marbre doré du comptoir */
 .hero-num .cap{color:var(--mut); font-size:12.5px; margin-top:6px}
 .delta-up{color:var(--good); font-weight:600}
 .delta-down{color:var(--bad); font-weight:600}
