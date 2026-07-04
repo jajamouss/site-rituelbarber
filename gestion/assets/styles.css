@@ -13,6 +13,20 @@
   --radius:14px;
 }
 
+/* Thèmes alternatifs, choisis par le gérant dans Réglages (défaut : vert salon) */
+:root[data-skin="turquoise"]{
+  --bg:#EDF5F4; --card:#FCFEFD; --line:#D2E3E1; --line-soft:#E0EDEB;
+  --ink:#132728; --mut:#54706F;
+  --accent:#0E7580; --accent-soft:#0E758014; --vif:#0F97A5; --on-accent:#F2FBFA;
+  --good:#3E6B34; --good-bg:#E0EEE3; --good-line:#BBD6C0;
+}
+:root[data-skin="clair"]{
+  --bg:#F3EFE6; --card:#FDFCF8; --line:#E0D9C8; --line-soft:#EAE4D6;
+  --ink:#1A1912; --mut:#75705F;
+  --accent:#96652C; --accent-soft:#96652C14; --vif:#B26A1F; --on-accent:#FBF7EE;
+  --good:#4C6B42; --good-bg:#E4EBDD; --good-line:#C4D2B8;
+}
+
 *{box-sizing:border-box}
 html{height:100%}
 body{

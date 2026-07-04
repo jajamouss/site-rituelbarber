@@ -14,7 +14,20 @@ const S = {
   ownerDate: isoToday(),
   stats: null,
   barbers: [],
+  theme: 'vert',
 };
+
+const THEMES = [
+  ['vert', 'Vert & Blanc', '#525E36'],
+  ['turquoise', 'Turquoise lagon', '#0E7580'],
+  ['clair', 'Crème & Bois', '#96652C'],
+];
+
+function applyTheme(t) {
+  S.theme = THEMES.some(([k]) => k === t) ? t : 'vert';
+  if (S.theme === 'vert') document.documentElement.removeAttribute('data-skin');
+  else document.documentElement.setAttribute('data-skin', S.theme);
+}
 
 /* ================================================================ utils */
 
@@ -108,6 +121,7 @@ function updateOfflineBadge() {
 async function boot() {
   try {
     const b = await api('bootstrap');
+    applyTheme(b.theme || 'vert');
     if (b.setup_required) return renderSetup();
     if (b.user) { S.user = b.user; return enter(); }
     renderLogin();
@@ -615,6 +629,16 @@ function renderSettings() {
       ${brbRows}
       <button class="addlink" id="brb-add">+ Ajouter un barbier</button>
     </div>
+    <div class="lbl">Couleur de l'application</div>
+    <div class="card">
+      <div class="chips-row">
+        ${THEMES.map(([k, label, c]) => `
+          <button class="pchip${S.theme === k ? ' on' : ''}" data-theme="${k}">
+            <span style="display:inline-block;width:11px;height:11px;border-radius:50%;background:${c};margin-right:7px;vertical-align:-1px"></span>${label}
+          </button>`).join('')}
+      </div>
+      <p class="hint" style="margin:10px 0 0">S'applique à tous les téléphones, y compris celui du barbier.</p>
+    </div>
     <div class="lbl">Export comptable</div>
     <div class="card">
       <div class="export-row">
@@ -639,6 +663,16 @@ function renderSettings() {
     el.onclick = () => openBarberSheet(S.barbers.find(b => b.id === Number(el.dataset.brb)));
   });
   document.getElementById('brb-add').onclick = () => openBarberSheet(null);
+  document.querySelectorAll('[data-theme]').forEach(el => {
+    el.onclick = async () => {
+      try {
+        const r = await api('theme_set', { theme: el.dataset.theme });
+        applyTheme(r.theme);
+        renderSettings();
+        toast('Couleur appliquée ✓');
+      } catch (e) { toast(esc(e.message), { error: true }); }
+    };
+  });
   document.getElementById('ex-go').onclick = () => {
     const f = document.getElementById('ex-from').value, t = document.getElementById('ex-to').value;
     window.location.href = 'api.php?action=export&from=' + f + '&to=' + t;

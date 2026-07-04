@@ -106,7 +106,17 @@ function route(string $action, array $in): void
             ok([
                 'setup_required' => $count === 0,
                 'user' => $u ? ['name' => $u['name'], 'role' => $u['role']] : null,
+                'theme' => setting_get('theme', 'vert'),
             ]);
+
+        case 'theme_set':
+            require_owner();
+            $theme = $in['theme'] ?? '';
+            if (!in_array($theme, ['vert', 'turquoise', 'clair'], true)) {
+                fail(422, 'Thème inconnu.');
+            }
+            setting_set('theme', $theme);
+            ok(['theme' => $theme]);
 
         case 'setup':
             if ((int) db()->query('SELECT COUNT(*) FROM users')->fetchColumn() > 0) {
