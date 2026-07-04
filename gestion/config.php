@@ -57,6 +57,12 @@ function load_store(): array
         $store = default_store();
     }
     $store += default_store();
+    if (empty($store['services'])) {
+        $defaults = default_store();
+        $store['services'] = $defaults['services'];
+        $store['next']['services'] = 7;
+        save_store($store);
+    }
     return $store;
 }
 

@@ -128,15 +128,16 @@ function render(tab=null){
 
 function renderCashier(){
   const services = state.services.filter(s=>Number(s.active));
+  const priceOptions = state.selected ? [state.price-5,state.price,state.price+5].filter(v=>v>0) : [];
   shell(`<section class="grid two">
     <div class="card">
       <h2>Nouvelle prestation</h2>
-      <div class="services">${services.map(s=>`<button class="service ${state.selected?.id==s.id?'active':''}" data-service="${s.id}"><strong>${esc(s.name)}</strong><span>${euro(s.price)}</span></button>`).join('')}</div>
+      <div class="services">${services.map(s=>`<button class="service ${state.selected?.id==s.id?'active':''}" data-service="${s.id}"><strong>${esc(s.name)}</strong><span>${euro(s.price)}</span></button>`).join('') || '<p>Aucune prestation active. Le patron peut les ajouter dans Reglages.</p>'}</div>
     </div>
     <div class="card">
       <h2>${esc(state.selected?.name||'Prestation')}</h2>
-      <label>Prix</label>
-      <div class="price-row">${[state.price-5,state.price,state.price+5].filter(v=>v>0).map(v=>`<button class="chip ${v===state.price?'active':''}" data-price="${v}">${euro(v)}</button>`).join('')}<input id="custom-price" inputmode="numeric" placeholder="Autre prix"></div>
+      <label>Prix modifiable</label>
+      <div class="price-row">${priceOptions.map(v=>`<button class="chip ${v===state.price?'active':''}" data-price="${v}">${euro(v)}</button>`).join('')}<input id="custom-price" inputmode="numeric" placeholder="Autre prix / geste client"></div>
       <label>Paiement</label><div class="pay"><button data-pay="card" class="${state.payment==='card'?'active':''}">Carte</button><button data-pay="cash" class="${state.payment==='cash'?'active':''}">Espèces</button></div>
       <div class="setup-actions"><button class="btn good" id="save-entry">Enregistrer ✓</button><button class="btn ghost" id="undo">Annuler dernière</button></div>
     </div>
@@ -241,4 +242,12 @@ async function saveService(id){
 
 window.addEventListener('online', queueFlush);
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
-render();
+async function boot(){
+  const mismatch = state.user && ((state.entryMode === 'pin' && state.user.role !== 'barber') || (state.entryMode === 'admin' && state.user.role !== 'admin'));
+  if(mismatch){
+    await api('logout',{}).catch(()=>{});
+    state.user = null;
+  }
+  render();
+}
+boot();

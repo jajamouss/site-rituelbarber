@@ -16,7 +16,7 @@ $csrf = csrf_token();
   <title>Rituel Barber - Gestion</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/style.css?v=2">
+  <link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body data-has-users="<?= $hasUsers ? '1' : '0' ?>" data-user-role="<?= htmlspecialchars($user['role'] ?? '', ENT_QUOTES) ?>">
   <noscript>Active JavaScript pour utiliser l'application de gestion.</noscript>
@@ -34,6 +34,6 @@ $csrf = csrf_token();
       user: <?= json_encode($user ?: null, JSON_UNESCAPED_UNICODE) ?>
     };
   </script>
-  <script src="assets/app.js?v=2" defer></script>
+  <script src="assets/app.js?v=3" defer></script>
 </body>
 </html>
