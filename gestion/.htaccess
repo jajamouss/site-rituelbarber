@@ -1,0 +1,16 @@
+# Rituel Barber — Gestion : application privée.
+
+# Jamais indexée par les moteurs de recherche.
+<IfModule mod_headers.c>
+  Header set X-Robots-Tag "noindex, nofollow, noarchive"
+</IfModule>
+
+# Pas de listing de dossiers.
+Options -Indexes
+
+# La base de données n'est jamais servie par le web.
+<FilesMatch "\.(sqlite|sqlite-wal|sqlite-shm|db)$">
+  Require all denied
+</FilesMatch>
+
+DirectoryIndex index.html
