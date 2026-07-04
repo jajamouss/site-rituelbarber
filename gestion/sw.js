@@ -1,5 +1,5 @@
-const CACHE = 'rituel-gestion-v1';
-const ASSETS = ['./', './assets/style.css?v=1', './assets/app.js?v=1', './manifest.webmanifest'];
+const CACHE = 'rituel-gestion-v2';
+const ASSETS = ['./', './assets/style.css?v=2', './assets/app.js?v=2', './manifest.webmanifest'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
