@@ -52,6 +52,9 @@ label{display:block;color:var(--muted);font-size:13px;margin:12px 0 6px}
 .stat span{color:var(--muted);font-size:13px}
 .entries{display:grid;gap:8px}
 .entry{display:grid;grid-template-columns:auto 1fr auto auto;gap:12px;align-items:center;padding:12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.entry.count-row{grid-template-columns:1fr auto}
+.entries.compact{margin-top:12px}
+.stat.solo{margin:10px 0 12px}
 .entry.void{opacity:.45;text-decoration:line-through}
 .time{color:var(--accent);font-weight:800}
 .tag{padding:5px 8px;border-radius:999px;font-size:12px;font-weight:900}

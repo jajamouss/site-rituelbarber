@@ -188,7 +188,11 @@ function dashboard(): never
     $store = load_store();
     $users = [];
     foreach ($store['users'] as $u) $users[(int)$u['id']] = $u['name'];
-    $entries = array_values(array_filter($store['entries'], fn($e) => $e['created_at'] >= $start && $e['created_at'] <= $end));
+    $entries = array_values(array_filter($store['entries'], function ($e) use ($start, $end, $user) {
+        if ($e['created_at'] < $start || $e['created_at'] > $end) return false;
+        if ($user['role'] === 'barber' && (int)$e['user_id'] !== (int)$user['id']) return false;
+        return true;
+    }));
     usort($entries, fn($a, $b) => strcmp($b['created_at'], $a['created_at']));
     foreach ($entries as &$e) $e['user_name'] = $users[(int)$e['user_id']] ?? 'Barbier';
     $valid = array_values(array_filter($entries, fn($e) => (int)$e['voided'] === 0));
@@ -198,7 +202,7 @@ function dashboard(): never
     $summary = ['date'=>$date,'total'=>$total,'total_label'=>euros($total),'clients'=>$count,'avg'=>$count?(int)round($total/$count):0,'avg_label'=>$count?euros((int)round($total/$count)):'0 €','cash'=>$cash,'card'=>$total-$cash];
     if ($user['role'] === 'barber') {
         foreach ($entries as &$e) { unset($e['price'], $e['payment']); }
-        $summary = ['date'=>$date,'clients'=>$count];
+        $summary = ['date'=>$date,'clients'=>$count,'by_service'=>by_service_count($valid),'recent'=>barber_recent((int)$user['id'], $store['entries'])];
     } else {
         $summary['week'] = period_total('week', $store['entries']);
         $summary['month'] = period_total('month', $store['entries']);
@@ -218,6 +222,31 @@ function period_total(string $period, array $entries): array
     return ['total'=>$total,'total_label'=>euros($total),'clients'=>count($valid)];
 }
 
+function barber_recent(int $userId, array $entries): array
+{
+    $tz = new DateTimeZone('Europe/Paris');
+    $today = new DateTimeImmutable('today', $tz);
+    $yesterday = $today->modify('-1 day');
+    $days = [
+        $today->format('Y-m-d') => ['label' => 'Aujourd\'hui', 'date' => $today->format('Y-m-d'), 'total' => 0, 'by_service' => []],
+        $yesterday->format('Y-m-d') => ['label' => 'Hier', 'date' => $yesterday->format('Y-m-d'), 'total' => 0, 'by_service' => []],
+    ];
+    foreach ($entries as $e) {
+        if ((int)$e['user_id'] !== $userId || (int)$e['voided'] === 1) continue;
+        $day = substr((string)$e['created_at'], 0, 10);
+        if (!isset($days[$day])) continue;
+        $name = (string)$e['service_name'];
+        $days[$day]['by_service'][$name] ??= ['service_name' => $name, 'qty' => 0];
+        $days[$day]['by_service'][$name]['qty']++;
+        $days[$day]['total']++;
+    }
+    foreach ($days as &$day) {
+        $day['by_service'] = array_values($day['by_service']);
+        usort($day['by_service'], fn($a, $b) => $b['qty'] <=> $a['qty']);
+    }
+    return array_values($days);
+}
+
 function by_service(array $entries): array
 {
     $rows = [];
@@ -228,6 +257,18 @@ function by_service(array $entries): array
         $rows[$name]['total'] += (int)$e['price'];
     }
     usort($rows, fn($a,$b)=>$b['total']<=>$a['total']);
+    return array_values($rows);
+}
+
+function by_service_count(array $entries): array
+{
+    $rows = [];
+    foreach ($entries as $e) {
+        $name = $e['service_name'];
+        $rows[$name] ??= ['service_name'=>$name,'qty'=>0];
+        $rows[$name]['qty']++;
+    }
+    usort($rows, fn($a,$b)=>$b['qty']<=>$a['qty']);
     return array_values($rows);
 }
 

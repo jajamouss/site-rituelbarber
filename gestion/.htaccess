@@ -14,4 +14,6 @@ Options -Indexes
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteRule ^data/ - [F,L]
+  RewriteRule ^patron/?$ index.php?entry=admin [QSA,L]
+  RewriteRule ^coiffeur/?$ index.php?entry=pin [QSA,L]
 </IfModule>

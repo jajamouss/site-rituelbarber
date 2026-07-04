@@ -1,9 +1,21 @@
 const $ = (s, r=document) => r.querySelector(s);
 const app = $('#app');
 let csrf = window.RIT_DB.csrf;
-let state = { user: window.RIT_DB.user, services: [], selected: null, payment: 'card', price: 0, pin: '', date: today() };
+let state = { user: window.RIT_DB.user, services: [], selected: null, payment: 'card', price: 0, pin: '', date: today(), entryMode: entryMode() };
 
 function today(){ return new Date().toISOString().slice(0,10); }
+function entryMode(){
+  const path = location.pathname.toLowerCase();
+  const qs = location.search.toLowerCase();
+  if(path.endsWith('/patron') || path.endsWith('/patron/') || qs.includes('entry=admin') || qs.includes('patron')) return 'admin';
+  if(path.endsWith('/coiffeur') || path.endsWith('/coiffeur/') || qs.includes('entry=pin') || qs.includes('coiffeur')) return 'pin';
+  return 'pin';
+}
+function isDedicatedEntry(){
+  const path = location.pathname.toLowerCase();
+  const qs = location.search.toLowerCase();
+  return path.endsWith('/patron') || path.endsWith('/patron/') || path.endsWith('/coiffeur') || path.endsWith('/coiffeur/') || qs.includes('entry=') || qs.includes('patron') || qs.includes('coiffeur');
+}
 function euro(v){ return `${Number(v||0).toLocaleString('fr-FR')} €`; }
 function time(s){ return String(s||'').slice(11,16); }
 function esc(s){ return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
@@ -42,7 +54,7 @@ function shell(inner, tab='cashier'){
       <button data-tab="stats" class="${tab==='stats'?'on':''} admin-only">Stats</button>
       <button data-tab="settings" class="${tab==='settings'?'on':''} admin-only">Réglages</button>
     </nav>`;
-  $('#logout').onclick=async()=>{await api('logout',{}).catch(()=>{});state.user=null;renderLogin();};
+  $('#logout').onclick=async()=>{await api('logout',{}).catch(()=>{});state.user=null;renderLogin(state.entryMode);};
   document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>render(b.dataset.tab));
 }
 
@@ -65,15 +77,16 @@ function renderSetup(){
 }
 
 function renderLogin(mode='pin'){
+  state.entryMode = mode;
+  const dedicated = isDedicatedEntry();
   app.innerHTML = `<section class="card login-card">
-    <div class="brand-mark">RB</div><h2>${mode==='admin'?'Connexion gérant':'PIN barbier'}</h2>
-    <p>${mode==='admin'?'Accès complet aux totaux, exports et réglages.':'Saisie rapide, sans montants cumulés.'}</p>
+    <div class="brand-mark">RB</div><h2>${mode==='admin'?'Connexion patron':'PIN coiffeur'}</h2>
+    <p>${mode==='admin'?'Acces complet aux totaux, exports et reglages.':'Code PIN, puis compteur du jour.'}</p>
     ${mode==='admin'
-      ? `<label>Mot de passe</label><input id="admin-password" type="password" autofocus><button class="btn primary" id="admin-login">Entrer</button>`
+      ? `<label>Mot de passe</label><input id="admin-password" type="password" autocomplete="current-password" autofocus><button class="btn primary" id="admin-login">Entrer</button>`
       : `<div class="pin-dots">${[0,1,2,3].map(i=>`<span class="${state.pin.length>i?'on':''}"></span>`).join('')}</div><div class="keypad">${[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map(n=>`<button data-key="${n}">${n}</button>`).join('')}</div>`}
-    <div class="setup-actions"><button class="btn ghost" id="switch">${mode==='admin'?'Utiliser PIN barbier':'Gérant ? Mot de passe'}</button></div>
+    ${dedicated ? '' : `<div class="setup-actions"><a class="btn ghost" href="coiffeur">Lien coiffeur</a><a class="btn ghost" href="patron">Lien patron</a></div>`}
   </section>`;
-  $('#switch').onclick=()=>{state.pin='';renderLogin(mode==='admin'?'pin':'admin')};
   if(mode==='admin'){
     $('#admin-login').onclick=async()=>loginAdmin();
     $('#admin-password').onkeydown=e=>{if(e.key==='Enter')loginAdmin()};
@@ -83,7 +96,7 @@ function renderLogin(mode='pin'){
 }
 
 async function loginAdmin(){
-  try{const r=await api('login',{mode:'admin',password:$('#admin-password').value});state.user=r.user;await loadBase();render('cashier');}
+  try{const r=await api('login',{mode:'admin',password:$('#admin-password').value});state.user=r.user;await loadBase();render('stats');}
   catch(e){toast(e.message)}
 }
 async function pinKey(k){
@@ -103,9 +116,10 @@ async function loadBase(){
   state.price = state.selected ? Number(state.selected.price) : 0;
 }
 
-function render(tab='cashier'){
+function render(tab=null){
   if(!window.RIT_DB.hasUsers && !state.user) return renderSetup();
-  if(!state.user) return renderLogin();
+  if(!state.user) return renderLogin(state.entryMode);
+  if(!tab) tab = state.user.role==='admin' && state.entryMode==='admin' ? 'stats' : 'cashier';
   if(tab==='day') return renderDay();
   if(tab==='stats') return renderStats();
   if(tab==='settings') return renderSettings();
@@ -160,6 +174,7 @@ async function queueFlush(){
 async function renderDay(){
   const r=await api('dashboard',null,{qs:`&date=${state.date}`});
   const s=r.summary, admin=r.role==='admin';
+  if(!admin) return renderBarberDay(r);
   shell(`<section class="grid">
     <div class="card"><label>Date</label><input type="date" id="date" value="${esc(state.date)}"></div>
     <div class="stats">
@@ -169,6 +184,19 @@ async function renderDay(){
   </section>`, 'day');
   $('#date').onchange=e=>{state.date=e.target.value;renderDay()};
   document.querySelectorAll('[data-void]').forEach(b=>b.onclick=async()=>{if(confirm('Annuler cette ligne ?')){await api('entry_void',{id:b.dataset.void});renderDay();}});
+}
+
+function renderBarberDay(r){
+  const s = r.summary;
+  const days = s.recent || [];
+  shell(`<section class="grid two">
+    ${days.map(day => `<div class="card day-card">
+      <h2>${esc(day.label)}</h2>
+      <div class="stat solo"><b>${day.total}</b><span>Total prestations</span></div>
+      <div class="entries compact">${(day.by_service||[]).map(x=>`<div class="entry count-row"><strong>${esc(x.service_name)}</strong><b>${x.qty}</b></div>`).join('') || '<p>Aucune prestation.</p>'}</div>
+    </div>`).join('')}
+    <div class="card"><h2>Journal du jour</h2><div class="entries">${r.entries.map(entryHtml).join('')||'<p>Aucune prestation.</p>'}</div></div>
+  </section>`, 'day');
 }
 
 function entryHtml(e){
